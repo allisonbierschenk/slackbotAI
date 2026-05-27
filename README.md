@@ -34,14 +34,40 @@ Requires Node.js 18+.
 ## 2. Create the Slack app
 
 1. Go to [api.slack.com/apps](https://api.slack.com/apps) → **Create New App** → **From a manifest**
-2. Pick your workspace, paste the contents of `manifest.json`, click **Create**
-3. **Socket Mode** → toggle on → generate an app-level token (starts with `xapp-`)
-4. **OAuth & Permissions** → **Install to Workspace** → copy the Bot Token (`xoxb-`) and User Token (`xoxp-`)
-5. **Basic Information** → copy the **Signing Secret**
+2. Pick your workspace
+3. Delete everything in the text box and paste the contents of `manifest.json` from this repo
+4. Click **Next** → **Create**
+
+This sets up the bot user, scopes, slash command, event subscriptions, and Home tab in one shot.
 
 ---
 
-## 3. Configure your `.env`
+## 3. Enable Socket Mode and grab your tokens
+
+You'll need **four** Slack values for `.env`. Here's where each one lives:
+
+### a. App-level token (`SLACK_APP_TOKEN`, starts with `xapp-`)
+1. Left sidebar → **Socket Mode**
+2. Toggle **Enable Socket Mode** on
+3. Name the token (e.g. `my-app-token`) → **Generate**
+4. Copy the `xapp-…` token
+
+### b. Bot token + User token (`SLACK_BOT_TOKEN`, `SLACK_USER_TOKEN`)
+1. Left sidebar → **OAuth & Permissions**
+2. Click **Install to Workspace** → **Allow**
+3. Copy the **Bot User OAuth Token** (`xoxb-…`)
+4. Copy the **User OAuth Token** (`xoxp-…`)
+
+### c. Signing secret (`SLACK_SIGNING_SECRET`)
+1. Left sidebar → **Basic Information**
+2. Scroll to **App Credentials** → copy **Signing Secret**
+
+### d. (Optional) make the bot always show as online
+**App Home** → check **Always Show My Bot as Online**.
+
+---
+
+## 4. Configure your `.env`
 
 ```bash
 cp .env.example .env
@@ -60,7 +86,7 @@ Fill in every value. **Never commit this file** — it's already in `.gitignore`
 
 ---
 
-## 4. Run it
+## 5. Run it
 
 ```bash
 npm start
@@ -73,11 +99,19 @@ Scriptbot is running on port 3000
 Now connected to Slack
 ```
 
-Then in Slack: open the bot → **Home** tab → **+ Add trigger collection** → DM the bot the trigger phrase.
+---
+
+## 6. Use it in Slack
+
+1. In Slack, search for your app by name (the one you set in `manifest.json`)
+2. Open it → **Home** tab → **+ Add trigger collection**
+3. Set a trigger phrase and the response you want
+4. DM the bot that phrase in the **Messages** tab — it replies automatically
+5. Anything that doesn't match a trigger gets answered by Claude
 
 ---
 
-## 5. Stop the server
+## 7. Stop the server
 
 `Ctrl+C` in the terminal.
 
@@ -89,4 +123,4 @@ Then in Slack: open the bot → **Home** tab → **+ Add trigger collection** �
 - **`dispatch_failed`?** Wrong `SLACK_SIGNING_SECRET` — recheck Basic Information.
 - **Bot shows wrong name/icon?** App settings → **App Home** → enable "Always Show My Bot as Online".
 
-Full step-by-step walkthrough: [SETUP.md](SETUP.md).
+Full step-by-step walkthrough with screenshots-style detail: [SETUP.md](SETUP.md).
