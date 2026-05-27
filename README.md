@@ -1,8 +1,8 @@
 # slackbotAI — Slack Trigger Bot Demo
 
-A Slack app that auto-replies to trigger phrases you define from the Home tab. If a message doesn't match any trigger, Claude answers as a fallback.
+A Slack app that auto-replies to trigger phrases you define from the Home tab. If a message doesn't match any trigger, the bot replies with a canned fallback message.
 
-**Stack:** Node + Slack Bolt (Socket Mode) · Anthropic Claude SDK
+**Stack:** Node + Slack Bolt (Socket Mode)
 
 ---
 
@@ -14,7 +14,7 @@ A Slack app that auto-replies to trigger phrases you define from the Home tab. I
 | `src/homeView.js` | Builds the Home tab UI and modals (add/view triggers). |
 | `src/triggerStore.js` | Stores trigger phrases → responses per user. |
 | `src/playback.js` | Plays back scripted multi-turn responses. |
-| `src/claudeFallback.js` | Calls the Anthropic API when no trigger matches. |
+| `src/claudeFallback.js` | Returns a canned fallback reply when no trigger matches. |
 | `src/scriptLoader.js` / `parseResponse.js` | Loads and parses scripted conversations. |
 | `manifest.json` | Slack app manifest — paste this when creating the app. |
 | `.env.example` | Required environment variables — copy to `.env` and fill in. |
@@ -81,7 +81,6 @@ Fill in every value. **Never commit this file** — it's already in `.gitignore`
 | `SLACK_APP_TOKEN` | Socket Mode → app-level token (`xapp-…`) |
 | `SLACK_USER_TOKEN` | OAuth & Permissions → **User OAuth Token** (`xoxp-…`) |
 | `SLACK_SIGNING_SECRET` | Basic Information → **App Credentials** |
-| `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com) → API keys |
 | `PORT` | Local port (default `3000`) |
 
 ---
@@ -107,7 +106,7 @@ Now connected to Slack
 2. Open it → **Home** tab → **+ Add trigger collection**
 3. Set a trigger phrase and the response you want
 4. DM the bot that phrase in the **Messages** tab — it replies automatically
-5. Anything that doesn't match a trigger gets answered by Claude
+5. Anything that doesn't match a trigger gets a canned fallback reply
 
 ---
 
