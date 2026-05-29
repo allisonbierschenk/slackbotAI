@@ -73,6 +73,8 @@ You'll need **four** Slack values for `.env`. Here's where each one lives:
 cp .env.example .env
 ```
 
+> ⚠️ **Heads up:** `cp` overwrites an existing `.env` without prompting. If you already have a `.env` with values you want to keep, back it up first (`cp .env .env.bak`) or skip this command and edit your existing file directly.
+
 Fill in every value. **Never commit this file** — it's already in `.gitignore`.
 
 | Variable | Where it comes from |

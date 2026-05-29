@@ -57,6 +57,7 @@ A Slack app that lets you set up trigger phrases → auto-responses from the bot
    ```
    cp .env.example .env
    ```
+   ⚠️ **Heads up:** `cp` will overwrite an existing `.env` file without warning. If you already have a `.env` with values you want to keep, back it up first (e.g. `cp .env .env.bak`) or skip this step and edit your existing file instead.
 2. Open `.env` in a text editor and fill in your tokens:
    ```
    SLACK_BOT_TOKEN=xoxb-...        ← from Step 4
